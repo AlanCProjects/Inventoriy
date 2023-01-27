@@ -1,0 +1,29 @@
+
+{% extends '_marco.html' %}
+
+{% block head %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
+    <title>Log in</title>
+{% endblock %}
+
+{% block body %}
+    <div id= "divheader">
+        <h1>LIBER DOMUS</h1>
+        <h5>Book Store</h6>
+    </div>
+
+    <div  id="isotipo">
+        <img src="{{url_for('static', filename='img/Logos/ISOTIPO.png')}}" />
+
+    </div>
+
+    <div id="login">
+        <form action="/" method="POST">
+            <p>Username:</p>
+            <input type="text" name="user" class="imptext">
+            <p>Password:</p>
+            <input type="password" name="passwd" class="imptext">
+            <input type="submit" value="LOG IN" class= "impsub">
+        </form>
+    </div>
+{% endblock %}

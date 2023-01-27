@@ -1,0 +1,31 @@
+{% extends '_marco.html' %}
+
+{% block head %}
+    <title>INVENTORY</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/inventory.css') }}">
+
+{% endblock %}
+
+{% block body %}
+    <div id="add">
+        <div id="options-container">
+            <table>   
+                <tr>
+                    <td><a>FLOOR MAP</a></td>
+                    <td><a href="/inv_floormap"><button class="button">show</button></a></td>
+                </tr>
+                <tr>
+                    <td><a>AGENTES</a></td>
+                    <td><a href="/agents"><button class="button">show</button></a></td>
+                </tr>
+                <tr>
+                    <td><a>MONITORES</a></td>
+                    <td><a href="/monitors"><button class="button">show</button></a></td>
+                <tr>
+                    <td><a>LAPTOPS</a></td>
+                    <td><a href="/laptops"><button class="button">Show</button></a></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+{% endblock %}

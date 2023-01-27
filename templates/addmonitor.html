@@ -1,0 +1,18 @@
+{% extends '_marco.html' %}
+
+{% block head %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/add.css') }}">
+    <title>ADD NEW MONITOR</title>
+{% endblock %}
+
+{% block body %}
+    <div id="new-agent-container">
+        <h1>ADD NEW MONITOR</h1>
+        <form action="/addmonitor" method="POST">
+            <input type="text" class="txtbox" name="add-brand" placeholder="Brand">
+            <input type="text" class="txtbox" name="add-size" placeholder="Size">
+            <input type="text" name="add-serialnumber" placeholder="S/N">
+            <input type="submit" class=button value="ADD">
+        </form>
+    </div>
+{% endblock %}

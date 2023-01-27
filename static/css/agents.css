@@ -1,0 +1,44 @@
+#form, #agents-list{
+    background: #6fbfc1;
+    display: table;
+    margin: 2.5vw auto;
+    padding: 0.8vw 3.5vw;
+    border-radius: 1vw;
+    width: 70%;
+}
+
+#form{
+    display:flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#agents-list table td, th{
+    font-family: Arial, Helvetica, sans-serif;
+    padding: 0.5vw 10vw 0.5vw 1vw;
+    border: 0.05vw solid;
+}
+#agents-list table{
+    border-collapse:collapse;
+}
+
+.button{
+    background-color: black;
+    color: #FEFEFE;
+    margin-right: 0.5vw;
+    cursor: pointer;
+    padding:0.3vw;
+    border-radius: 0.5vw;
+    float: left;
+}
+.button:hover{
+    background-color:#1b1b1b;
+}
+
+input[type="text"]{
+    margin-right: 1vw;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 1vw;
+    height: 1.5vw;
+    float: left;
+}

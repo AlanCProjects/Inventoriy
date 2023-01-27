@@ -1,0 +1,33 @@
+{% extends "_marco.html" %}
+
+{% block head %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/agents.css') }}">
+    <title>LAPTOPS</title>
+{% endblock %}
+
+{% block body %}
+    <div id="form">
+        <a href="/addlaptop"><button class="button">ADD NEW LAPTOP</button></a>
+    </div>
+
+    <div id="agents-list">
+        <table>
+            <tr>
+                <th>Brand</th>
+                <th>Serial number</th>
+                <th>Options</th>
+            </tr>
+            {% for laptop in laptops %}
+            <tr>
+                <td>{{laptop[0].upper()}}</td>
+                <td>{{laptop[1].upper()}}</td>
+                <td>
+                    <a href="/editlaptop?name={{laptop[1]}}"><button class="button">Edit</button></a>
+                    <a href="/deletelaptop?serialnumber={{laptop[1]}}"><button class="button">Delete</button></a>
+                </td>
+            </tr>
+            {% endfor %}
+            </td>
+        </lu>
+    </div>
+{% endblock %}

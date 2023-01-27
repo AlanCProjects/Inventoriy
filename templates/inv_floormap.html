@@ -1,0 +1,17 @@
+{% extends '_marco.html' %}
+
+{% block head %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/add.css') }}">
+    <title>FLOOR MAP</title>
+{% endblock %}
+
+{% block body %}
+<div id="new-agent-container">
+    <form action="/inv_floormap" method="POST">
+        <input type="text" class="txtbox" name="add-desk" placeholder="Desk">
+        <input type="text" class="txtbox" name="add-floor" placeholder="Floor">
+        <input type="text" class="txtbox" name="add-snmonitor" placeholder="S/N Monitor">
+        <input type="submit" class=button value="ADD">
+    </form>
+</div>
+{% endblock %}

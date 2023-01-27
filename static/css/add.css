@@ -1,0 +1,36 @@
+#new-agent-container{
+    background: #6fbfc1;
+    display: table;
+    margin: 2.5vw auto;
+    padding: 0.8vw 3.5vw;
+    border-radius: 1vw;
+    width: 70%;
+}
+
+h1{
+    color: white;
+    -webkit-text-stroke: 0.08vw black;
+    text-shadow: 0 0 0.2vw gray;
+}
+
+form, h1{
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.button{
+    margin-right: 0.5vw;
+    cursor: pointer;
+    padding:0.3vw;
+    border-radius: 0.5vw;
+    float: left;
+}
+
+input[type="text"]{
+    margin-right: 1vw;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 1vw;
+    height: 1.5vw;
+    float: left;
+}

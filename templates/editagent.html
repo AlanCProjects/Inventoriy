@@ -1,0 +1,17 @@
+{% extends '_marco.html' %}
+
+{% block head %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/add.css') }}">
+    <title>EDIT AGENT</title>
+{% endblock %}
+
+{% block body %}
+    <div id="new-agent-container">
+        <h1>EDIT AGENT:</h1>
+        <form action="/editagent?name={{agent[0]}}&lastname={{agent[1]}}" method="POST">
+            <input type="text" class="txtbox" name="name" placeholder="Name" value="{{agent[0]}}" >
+            <input type="text" class="txtbox" name="lastname" placeholder="Lastname" value="{{agent[1]}}">
+            <input type="submit" class=button value="SAVE">
+        </form>
+    </div>
+{% endblock %}

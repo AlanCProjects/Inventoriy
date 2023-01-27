@@ -1,0 +1,48 @@
+{% extends '_marco.html' %}
+
+{% block head %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/agents.css') }}">
+    <title>Agents</title>
+{% endblock %}
+
+{% block body %}
+    <div id="form">
+        <a href="/addagent"><button class="button">ADD NEW AGENT</button></a>
+        <br>
+        <form action="agents" method="POST">
+            <input type="text" class="txtbox" name="sr-name" placeholder="Name">
+            <input type="text" class="txtbox" name="sr-lastname" placeholder="Lastname">
+            <input type="submit" class="button" value="SEARCH">
+        </form>
+    </div>
+
+    <div id="agents-list">
+        <table>
+            <tr>
+                <th>Name</th>
+                <th>Lastname</th>
+                <th>Status</th>
+                <th>Options</th>
+            </tr>
+                {% for agent in agents %}
+                <tr>
+                    <td>{{agent[0].capitalize()}}</td>
+                    <td>{{agent[1].capitalize()}}</td>
+                    <td>{{agent[2].upper()}}</td>
+                    <td>
+                        <a href="/detailagent?name={{agent[0]}}&lastname={{agent[1]}}"><button class="button">Details</button></a> 
+                        <a href="/editagent?name={{agent[0]}}&lastname={{agent[1]}}"><button class="button">Edit</button></a> 
+                        <a href="/deleteagent?name={{agent[0]}}&lastname={{agent[1]}}"><button class="button">Delete</button></a>
+                        {% if agent[2] != 'dismissed' %}
+                        <a href="/dismissagent?name={{agent[0]}}&lastname={{agent[1]}}"><button class="button">Dissmit</button></a>
+                        {% else %}
+                        <a href="/activeagent?name={{agent[0]}}&lastname={{agent[1]}}"><button class="button">Active</button></a>
+                        {% endif %} 
+                    </td>
+                </tr>
+                {% endfor %}
+            </td>
+        </lu>
+    </div>
+
+{% endblock %}

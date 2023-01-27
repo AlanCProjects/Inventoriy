@@ -1,0 +1,21 @@
+{% extends '_marco.html' %}
+
+{% block head %}
+    <title>ADD NEW LAPTOP</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/add.css') }}">
+
+
+{% endblock %}
+
+{% block body %}
+
+    <div id="new-agent-container">
+        <h1>ADD NEW LAPTOP:</h1>
+        <form action="/addlaptop" method="POST">
+            <input type="text" class="txtbox" name="add-brand" placeholder="Brand">
+            <input type="text" class="txtbox" name="add-serialnumber" placeholder="SN">
+            <input type="submit" class=button value="ADD">
+        </form>
+    </div>
+
+{% endblock %}

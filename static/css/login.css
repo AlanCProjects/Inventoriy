@@ -1,0 +1,84 @@
+
+#divheader{
+    background-color: #6fbfc1;
+    padding: 0.5%;
+    margin-top:0;
+    margin:auto;
+    text-align: center;
+    height: 15%;
+    width: 60%;
+    cursor: default;
+    user-select: none;
+    border-end-end-radius: 50px;
+    border-end-start-radius: 50px;
+}
+#divheader h1{
+    font-size: 4vw;
+    /* text-shadow: 1px 1px #000000; */
+    padding: 0;
+    margin-top: 0;
+}
+
+#divheader h5{
+    font-size: 1vw;
+    float: right;
+    margin: -4.5%;
+    padding-right: 27%;
+}
+
+#login{
+    background-color: #6fbfc1;
+    padding-top: 7%;
+    padding-bottom: 0%;
+    margin:auto;
+    height: 45%;
+    width: 30%;
+    border-radius: 5%;
+    margin-top:-7%;
+    text-align: center;
+}
+
+#login p{
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    font-size: 1.3vw;
+}
+
+#login .imptext{
+    font-size: 1.2vw;
+    width: 90%;
+    height: 10%;
+}
+
+#login .impsub{
+    background-color: #222222;
+    font-size: 1vw;
+    color:white;
+    border: none;
+    margin-top: 10%;
+    width: 10vw;
+    height: 3vw;
+    border-radius: 10px;
+}
+
+#login .impsub:active{
+    background-color: black;
+}
+
+
+#isotipo{
+    width:16vw ;
+    user-select: none;
+    padding:0;
+    margin: auto;
+    margin-top: -2%;
+}
+
+#isotipo img{
+    padding: 0;
+    max-height: 16vw;
+    margin:auto;
+    /* height: 100%;
+    width: 100%; */
+}
+
