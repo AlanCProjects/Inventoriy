@@ -90,7 +90,6 @@ def editagent():
         if request.method == 'POST':
             name = request.form['name']
             lastname = request.form['lastname']
-            print(name, lastname)
             sql.update('agents', f'name = "{name}", lastname = "{lastname}"',
             f'name="{ltsagent[0]}" AND lastname = "{ltsagent[1]}"')
             return redirect(url_for('agents'))
