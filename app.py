@@ -51,6 +51,33 @@ def agents():
         for agent in reqagents:
             ltsagents.append(str(agent).replace("')","").replace("'","").replace(" ","").split(","))
 
+        if request.method == 'POST':
+            filt = []
+            srname = request.form['sr-name'].lower()
+            srlastname = request.form['sr-lastname'].lower()
+
+            if srname != '' and srlastname != '':
+                for i in ltsagents:
+                    if srname in i and srlastname in i:
+                        filt.append(i)
+
+            elif srname != '' and srlastname == '':
+                for i in ltsagents:
+                    if srname in i:
+                        filt.append(i)
+
+            elif srname == '' and srlastname !='':
+                for i in ltsagents:
+                    if srlastname in i:
+                        filt.append(i)                        
+            else:
+                return render_template('agents.html', user = True, agents = ltsagents)
+            
+            return render_template('agents.html', user = True, agents = filt)
+            
+        else:
+            print('this is not a post')            
+            
         return render_template('agents.html', user = True, agents = ltsagents)
     else:
         return redirect(url_for('index'))
@@ -62,7 +89,7 @@ def addagent():
         if request.method == 'POST':
             addname = request.form['add-name']
             addlastname = request.form['add-lastname']
-            sql.add_agent(addname,addlastname)
+            sql.add_agent(addname.lower(),addlastname.lower())
             return redirect(url_for("agents"))
 
         else:
