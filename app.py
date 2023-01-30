@@ -8,16 +8,23 @@ app.secret_key = "key"
 
 @app.route('/', methods=['POST', 'GET'])
 def index():
+    #If there are an session active redirect to the homepage
     if 'user' in session:
         return redirect(url_for('home'))
     else:
         if request.method == 'POST':
+            
+            #Load the user sended by the user and the list of usersnames in db 
             user = request.form['user']
             users = sql.request('users', 'user')
+
+            #If the user sended by the user is in the list of users
             if user in users:
+                #Load the password sended by the user and the list of passwords in db
                 passwd = request.form['passwd']
                 passwds = sql.request('users','passwd', f'user = "{user}"')
                 if passwd in passwds:
+                    #Set in session the user and redirect to the homepage
                     session['user'] = user
                     return redirect(url_for('home'))
                 else:
@@ -30,17 +37,22 @@ def index():
 
 @app.route('/home')
 def home():
+    #Check if there are a session active 
     if "user" in session:
         return render_template('home.html', user = True)
-    else:
-        return redirect('/')
+
+    #If there aren't a session active the user is sended to the login page
+    return redirect('/')
 
 @app.route('/inventory')
 def inventory():
+    #Check if there are a session active 
     if 'user' in session:
+        #Render inventriy
         return render_template('inventory.html', user = True)
-    else:
-        return redirect(url_for('index'))  
+
+    #If there aren't a session active the user is sended to the login page
+    return redirect(url_for('index'))  
 
 #AGENTS
 @app.route('/agents', methods = ['POST', 'GET'])
@@ -79,8 +91,8 @@ def agents():
             print('this is not a post')            
             
         return render_template('agents.html', user = True, agents = ltsagents)
-    else:
-        return redirect(url_for('index'))
+
+    return redirect(url_for('index'))
 
 @app.route('/addagent', methods=['POST', 'GET'])
 def addagent():
@@ -94,17 +106,20 @@ def addagent():
 
         else:
             return render_template('addagent.html', user=True)
-    else:
-        return redirect(url_for('/'))
+
+    return redirect(url_for('index'))
 
 @app.route('/deleteagent', methods = ['POST', 'GET'])
 def deleteagent():
-    name = request.args.get('name', None)
-    lastname = request.args.get('lastname', None)
-    if name != None and lastname != None:
-        sql.delete_agent(name, lastname)
+    if 'user' in session:
+        name = request.args.get('name', None)
+        lastname = request.args.get('lastname', None)
+        if name != None and lastname != None:
+            sql.delete_agent(name, lastname)
 
-    return redirect(url_for('agents'))
+        return redirect(url_for('agents'))
+
+    return redirect(url_for('index'))
 
 @app.route('/editagent', methods = ['POST', 'GET'])
 def editagent():
@@ -117,42 +132,50 @@ def editagent():
         if request.method == 'POST':
             name = request.form['name']
             lastname = request.form['lastname']
-            sql.update('agents', f'name = "{name}", lastname = "{lastname}"',
+            sql.update('agents', f'name = "{name.lower()}", lastname = "{lastname.lower()}"',
             f'name="{ltsagent[0]}" AND lastname = "{ltsagent[1]}"')
             return redirect(url_for('agents'))
         
         else:
             return render_template('editagent.html', user = True, agent = ltsagent)
         
-    else:
-        return redirect(url_for('index'))
+    return redirect(url_for('index'))
 
 @app.route('/detailagent')
 def detailagent():
-    _name = request.args.get('name', None)
-    _lastname = request.args.get('lastname', None)
-    
-    return render_template('agentdetail.htm', user=True, name = _name, lastname = _lastname)
+    if 'user' in session:
+        _name = request.args.get('name', None)
+        _lastname = request.args.get('lastname', None)
+        
+        return render_template('agentdetail.htm', user=True, name = _name, lastname = _lastname)
+
+    return redirect(url_for('index'))
 
 @app.route('/activeagent', methods = ['POST', 'GET'])
 def activeagent():
-    name = request.args.get('name', None)
-    lastname = request.args.get('lastname', None)
+    if 'user' in session:
+        name = request.args.get('name', None)
+        lastname = request.args.get('lastname', None)
 
-    if name != None and lastname != None:
-        sql.active(name, lastname)
+        if name != None and lastname != None:
+            sql.active(name, lastname)
 
-    return redirect(url_for('agents'))
+        return redirect(url_for('agents'))
+    
+    return redirect(url_for('index'))
 
 @app.route('/dismissagent', methods = ['POST', 'GET'])
 def dismissagent():
-    name = request.args.get('name', None)
-    lastname = request.args.get('lastname', None)
+    if 'user' in session:
+        name = request.args.get('name', None)
+        lastname = request.args.get('lastname', None)
 
-    if name != None and lastname != None:
-        sql.dismiss(name, lastname)
+        if name != None and lastname != None:
+            sql.dismiss(name, lastname)
 
-    return redirect(url_for('agents'))
+        return redirect(url_for('agents'))
+
+    return redirect(url_for('index'))
 
 #MONITORS
 @app.route('/monitors', methods = ['POST', 'GET'])
@@ -164,8 +187,8 @@ def monitors():
             ltsmonitors.append(str(monitor).replace("')","").replace("'","").replace(" ","").split(","))
 
         return render_template('monitors.html', user = True, monitors = ltsmonitors)
-    else:
-        return redirect(url_for('index'))
+
+    return redirect(url_for('index'))
 
 @app.route('/addmonitor', methods=['POST', 'GET'])
 def addmonitors():
@@ -179,15 +202,18 @@ def addmonitors():
             return redirect(url_for("monitors"))
         else:
             return render_template('addmonitor.html', user = True)
-    else:
-        return redirect(url_for('/'))
+
+    return redirect(url_for('/'))
 
 @app.route('/deletemonitor')
 def deletemonitor():
-    sn = request.args.get('serialnumber', None)
-    sql.delete(sn, 'monitors')
+    if 'user' in session:
+        sn = request.args.get('serialnumber', None)
+        sql.delete(sn, 'monitors')
 
-    return redirect(url_for('monitors'))
+        return redirect(url_for('monitors'))
+    
+    return redirect(url_for('index'))
 
 #LAPTOPS
 @app.route('/laptops')
@@ -199,8 +225,8 @@ def laptops():
             ltslaptops.append(str(laptop).replace("')","").replace("'","").replace(" ","").split(","))
 
         return render_template('laptops.html', user = True, laptops = ltslaptops)
-    else:
-        return redirect(url_for('/'))
+
+    return redirect(url_for('/'))
 
 @app.route('/addlaptop', methods = ['POST', 'GET'])
 def addlaptop():
@@ -211,8 +237,8 @@ def addlaptop():
             sql.add_laptop(addbrand, addserialnumber)
             return redirect(url_for('laptops'))
         return render_template('addlaptop.html', user=True )
-    else:
-        return redirect(url_for('/'))
+
+    return redirect(url_for('/'))
 
 @app.route('/deletelaptop')
 def deletelaptop():
@@ -220,8 +246,8 @@ def deletelaptop():
         sn = request.args.get('serialnumber', None)
         sql.delete(sn, 'laptops')
         return redirect(url_for('laptops'))
-    else:
-        return redirect(url_for('index'))
+
+    return redirect(url_for('index'))
 
 @app.route('/inv_floormap', methods=['POST', 'GET'])
 def inv_floormap():
@@ -235,8 +261,7 @@ def inv_floormap():
 
         return render_template('inv_floormap.html', user=True)
 
-    else:
-        return redirect(url_for('/'))
+    return redirect(url_for('/'))
 
 @app.route('/logout')
 def logout():
@@ -245,6 +270,11 @@ def logout():
         session.pop('user', None)
 
     return redirect('/')
-    
+
+@app.errorhandler(404)
+def error404(error):
+    return render_template('404.html'), 404
+
+
 if __name__ == "__main__":
     app.run(debug = True, host="0.0.0.0")
