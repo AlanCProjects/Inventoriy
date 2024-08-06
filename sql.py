@@ -1,7 +1,7 @@
 import sqlite3
 
 def add_agent(name, lastname, status = 'active'):
-    conn = sqlite3.connect('./static/db/inventory.db')
+    conn = sqlite3.connect('./static/db/officeinsight.db')
     c = conn.cursor()
 
     c.execute(f"""INSERT INTO agents VALUES('{name}', '{lastname}', '{status}' )""")
@@ -9,7 +9,7 @@ def add_agent(name, lastname, status = 'active'):
     conn.close()
 
 def add_laptop(brand, sn):
-    conn = sqlite3.connect('./static/db/inventory.db')
+    conn = sqlite3.connect('./static/db/officeinsight.db')
     c = conn.cursor()
 
     c.execute(f"""INSERT INTO laptops VALUES('{brand}', '{sn}')""")
@@ -18,7 +18,7 @@ def add_laptop(brand, sn):
     conn.close()
 
 def add_monitor(brand, size, sn):
-    conn = sqlite3.connect('./static/db/inventory.db')
+    conn = sqlite3.connect('./static/db/officeinsight.db')
     c = conn.cursor()
 
     c.execute(f"""INSERT INTO monitors VALUES('{brand}', {size}, '{sn}')""")
@@ -27,7 +27,7 @@ def add_monitor(brand, size, sn):
     conn.close()
 
 def add_have(agent_name, agent_lastname, laptop_sn):
-    conn = sqlite3.connect('./static/db/inventory.db')
+    conn = sqlite3.connect('./static/db/officeinsight.db')
     c = conn.cursor()
 
     c.execute(f"""INSERT INTO have VALUES('{agent_name}', '{agent_lastname}', '{laptop_sn}')""")
@@ -36,7 +36,7 @@ def add_have(agent_name, agent_lastname, laptop_sn):
     conn.close()
 
 def add_own(agent_name, agent_lastname, monitor_sn):
-    conn = sqlite3.connect('./static/db/inventory.db')
+    conn = sqlite3.connect('./static/db/officeinsight.db')
     c = conn.cursor()
 
     c.execute(f"""INSERT INTO own VALUES('{agent_name}', '{agent_lastname}', '{monitor_sn}')""")
@@ -45,7 +45,7 @@ def add_own(agent_name, agent_lastname, monitor_sn):
     conn.close()
 
 def update(table, set, condition):
-    conn = sqlite3.connect('./static/db/inventory.db')
+    conn = sqlite3.connect('./static/db/officeinsight.db')
     c = conn.cursor()
     
     c.execute(f"""
@@ -60,7 +60,7 @@ def update(table, set, condition):
 
 def request(table, row = '*', condition = ''):
     lst = []
-    conn = sqlite3.connect('./static/db/inventory.db')
+    conn = sqlite3.connect('./static/db/officeinsight.db')
     c = conn.cursor()
 
     if (condition == ''):
@@ -91,7 +91,7 @@ def request(table, row = '*', condition = ''):
     return lst
 
 def delete_agent(name, lastname):
-    conn = sqlite3.connect('./static/db/inventory.db')
+    conn = sqlite3.connect('./static/db/officeinsight.db')
     c = conn.cursor()
     print(name, lastname)
     c.execute(f"""
@@ -103,7 +103,7 @@ def delete_agent(name, lastname):
     conn.close()
 
 def delete(sn, table):
-    conn = sqlite3.connect('./static/db/inventory.db')
+    conn = sqlite3.connect('./static/db/officeinsight.db')
     c = conn.cursor()
 
     c.execute(f"""
@@ -115,7 +115,7 @@ def delete(sn, table):
     conn.close()
 
 def dismiss(name, lastname):
-    conn = sqlite3.connect('./static/db/inventory.db')
+    conn = sqlite3.connect('./static/db/officeinsight.db')
     c = conn.cursor()
 
     c.execute(f"""
@@ -128,7 +128,7 @@ def dismiss(name, lastname):
     conn.close()
     
 def active(name, lastname):
-    conn = sqlite3.connect('./static/db/inventory.db')
+    conn = sqlite3.connect('./static/db/officeinsight.db')
     c = conn.cursor()
 
     c.execute(f"""
