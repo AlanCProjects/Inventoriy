@@ -9,18 +9,26 @@
     {% block head %}{% endblock %}
 </head>
 <body>
-
     <div id="continer">
         {% if user %}
         <ul class = "menubar">
-            <li><a href="/home">Home</a></li>
-            <li><a href="/agents">Agents</a></li>
-            <li><a href="/inventory">Inventory</a></li>
+            <li><a href="/home">HOME</a></li>
+            <li>
+                <a href="/agents">AGENTS</a>
+                <ul>
+                    <li><a href="/agents/agent">· Agent</a></li>
+                    <li><a href="/agents/tl">· TeamLead</a></li>
+                    <li><a href="/agents/manager">· Manager</a></li>
+                </ul>
+            </li>
+            <li><a href="/inventory">INVENTORY</a></li>
             <li><a href="#">Privacy Policy</a></li>
             <li><a href="/logout">Logout</a></li>
         </ul>
+        <div id="info">
+            {% block body %}{% endblock %}
+        </div>
         {% endif %}
-        {% block body %}{% endblock %}
     </div>
     
 </body>

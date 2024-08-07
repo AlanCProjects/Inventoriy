@@ -8,23 +8,32 @@ body, html{
     margin:0;
     padding: 0%;
     position:absolute;
+    display: flex;
     top:0px;
     right:0px;
     bottom:0px;
     left:0px;
 }
+#info{
+    background-color: white;
+    margin: 2.5vw auto auto 1vw;
+    border-radius: 10px;
+    width: 70%;
+    height: 80%;
+}
 .menubar {
     background: #708dc2;
     display: table;
-    margin: 2.5vw auto;
+    margin: 2.5vw 1vw auto auto;
     padding: 0.8vw 1.7vw;
     border-radius: 8px;
-    width: 70%;
+    width: 10%;
+    height: 80%;
 }
 .menubar li {
     list-style: none;
-    display: inline-block;
-    margin-left: 5vw;
+    display: list-item;
+    margin-left: 1vw;
 }
 .menubar li a {
     font-family: arial;
@@ -35,8 +44,15 @@ body, html{
     font-size: 18px;
     display: block;
 }
+.menubar li ul li{
+    margin: 0px;
+}
 .menubar li a + a {
     margin-left: 16px;
+}
+.menubar li ul li a{
+    padding: .3vw;
+    font-size: 15px;
 }
 .menubar li a::after {
     content: '';
